@@ -18,6 +18,7 @@ class Main extends Component {
     this.baseState = this.state;
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onSort = this.onSort.bind(this);
   }
 
   componentDidMount() {
@@ -121,6 +122,13 @@ class Main extends Component {
     this.setState({name: "", surname: "", phone: "", age: ""});
   }
 
+  onSort(event, sortKey){
+
+    const data = this.state.entries;
+    data.sort((a,b) => a[sortKey].localeCompare(b[sortKey]));
+    this.setState({entries: data})
+  }
+
   render() {
     return (
       <main className="Main">
@@ -135,7 +143,10 @@ class Main extends Component {
           handleSubmit={this.handleSubmit}
         />
 
-        <Table entries={this.state.entries}/>
+        <Table
+          onSort={this.onSort}
+          entries={this.state.entries}
+        />
 
       </main>
     );

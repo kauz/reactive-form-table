@@ -1,4 +1,13 @@
 .Table {
   margin: 20px 0;
   width: 100%;
+
+  & thead {
+    background: lightyellow;
+  }
+
+  & th:hover {
+    cursor: pointer;
+    background: lightgoldenrodyellow;
+  }
 }
