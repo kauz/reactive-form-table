@@ -8,12 +8,14 @@ class Main extends Component {
     super(props);
     this.state = {
       entries: [],
+      errors: {name: "name is required.", surname: "surname is required.", phone: "phone is required.", age: "age is required."},
       name: "",
       surname: "",
       phone: "",
       age: ""
     };
 
+    this.baseState = this.state;
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -23,6 +25,17 @@ class Main extends Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
+    let errors =  Object.values(this.state.errors);
+
+    for (let i = 0; i < errors.length; i++) {
+      if (this.state.name.length === 0
+        || this.state.surname.length === 0
+        || this.state.phone.length === 0
+        || this.state.age.length === 0
+        || errors[i].length > 0) return
+    }
+
     let newEntry = {
       name: this.state.name,
       surname: this.state.surname,
@@ -32,19 +45,49 @@ class Main extends Component {
 
     this.createEntry(newEntry);
     this.storeEntryInLocalStorage(newEntry);
-    event.preventDefault();
+    this.setState({errors: this.baseState.errors});
   }
 
   handleInput(event) {
-    let input = event.target.id;
+    let name = event.target.id;
     let value = event.target.value;
+    event.target.className = "Form-Input";
 
-    this.setState({[input]: value});
+    if (name === "age") {
+      this.handleNumber(name, value)
+    } else {
+      this.handleString(name, value)
+    }
+
+    this.setState({[name]: value});
+  }
+
+  handleNumber(name, num) {
+    let errors = this.state.errors;
+
+    if (isNaN(parseInt(num))) {
+      errors[name] = `${name} must be a number.`;
+    } else {
+      errors[name] = ``;
+    }
+
+    this.setState({errors: errors});
+  }
+
+  handleString(name, str) {
+    let errors = this.state.errors;
+
+    if (str.trim().length < 1) {
+      errors[name] = `${name} is required.`;
+    } else {
+      errors[name] = ``;
+    }
+
+    this.setState({errors: errors});
   }
 
   getEntries() {
     let entries;
-    // let save = this.createEntry();
 
     if (localStorage.getItem('entries') === null) {
       entries = [];
@@ -83,6 +126,7 @@ class Main extends Component {
       <main className="Main">
 
         <Form
+          errors={this.state.errors}
           name={this.state.name}
           surname={this.state.surname}
           phone={this.state.phone}

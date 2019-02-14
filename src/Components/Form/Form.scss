@@ -12,4 +12,22 @@
   &-Control {
     margin: 0 10px;
   }
+
+  &-Input {
+
+    &_Error, &_Error:focus {
+      border: 1px solid #aa2707 !important;
+      & + .Form-Error {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &-Error {
+    color: #aa2707;
+    visibility: hidden;
+    opacity: 1;
+    transition: opacity 1s ease;
+  }
 }
