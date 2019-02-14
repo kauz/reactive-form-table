@@ -1,0 +1,15 @@
+.Form {
+  max-width: calc(220px * 4);
+  margin: 20px auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  text-align: center;
+  @media screen and (min-width: 769px) {
+    flex-flow: row wrap;
+  }
+
+  &-Control {
+    margin: 0 10px;
+  }
+}
