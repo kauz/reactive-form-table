@@ -16,12 +16,16 @@ class Table extends Component {
 
         </thead>
         <tbody>
-        <tr>
-          <td>Demo</td>
-          <td>Demo</td>
-          <td>Demo</td>
-          <td>Demo</td>
-        </tr>
+        {this.props.entries.map((entry, i) => {
+          return (
+            <tr key={i}>
+              <td>{entry.name}</td>
+              <td>{entry.surname}</td>
+              <td>{entry.phone}</td>
+              <td>{entry.age}</td>
+            </tr>);
+        })}
+
         </tbody>
 
       </table>

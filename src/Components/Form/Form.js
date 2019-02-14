@@ -1,11 +1,14 @@
 import React, {Component, Fragment} from 'react';
 import './Form.scss';
+import Input from "../Input/Input";
+import Button from "../Button/Button";
 
 class Form extends Component {
+  constructor(props) {
+    super(props);
 
-
-  handleSubmit() {
-    console.log("Submit!")
+    this.handleInput = this.props.handleInput.bind(this);
+    this.handleSubmit = this.props.handleSubmit.bind(this);
   }
 
   render() {
@@ -13,29 +16,11 @@ class Form extends Component {
       <Fragment>
         <form className={"Form"}>
 
-          <div className={"Form-Control"}>
-            <label htmlFor="name">First Name</label>
-            <input name={'name'} id={'name'} type="text"/>
-          </div>
-
-          <div className={"Form-Control"}>
-            <label htmlFor="surname">Last Name</label>
-            <input name={'surname'} id={'surname'} type="text"/>
-          </div>
-
-          <div className={"Form-Control"}>
-            <label htmlFor="phone">Phone</label>
-            <input name={'phone'} id={'phone'} type="text"/>
-          </div>
-
-          <div className={"Form-Control"}>
-            <label htmlFor="age">Age</label>
-            <input name={'age'} id={'age'} type="number"/>
-          </div>
-
-          <div className={"Form-Control"}>
-            <button id={'submit'} type="button" onClick={this.handleSubmit}>Submit</button>
-          </div>
+          <Input name={"name"} displayText={"First Name"} value={this.props.name} handler={this.handleInput}/>
+          <Input name={"surname"} displayText={"Last Name"} value={this.props.surname} handler={this.handleInput}/>
+          <Input name={"phone"} displayText={"Phone"} value={this.props.phone} handler={this.handleInput}/>
+          <Input name={"age"} displayText={"Age"} value={this.props.age} handler={this.handleInput}/>
+          <Button displayText={"Submit"} handler={this.handleSubmit}/>
 
         </form>
       </Fragment>
