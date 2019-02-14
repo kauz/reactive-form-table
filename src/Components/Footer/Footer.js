@@ -6,7 +6,7 @@ class Footer extends Component {
   render() {
     return (
       <footer className="Footer">
-          Telegram: <button color="primary" href="tg://resolve?domain=kauzlein">@kauzlein</button>
+          Telegram: <a className={"button"} href="tg://resolve?domain=kauzlein">@kauzlein</a>
       </footer>
     );
   }
